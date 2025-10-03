@@ -9,8 +9,6 @@
 │  ├─ utils.py      # paths, seeding
 │  └─ dataio.py     # small loaders for CSV/TXT corpora + splits
 └─ data/
-   ├─ raw/          # put datasets here locally (not committed)
-   └─ processed/    # derived files/splits (not committed)
 ```
 
 ## Setup
@@ -25,13 +23,10 @@ pip install -r requirements.txt
 
 ## Data
 
-Datasets are not committed. Place them locally:
+This repo uses two formats of the same splits:
 
-CSV with columns text and label → data/raw/your_dataset.csv
-
-Or plain text files under folders → data/raw/class_a/*.txt, data/raw/class_b/*.txt
-
-Update the notebooks’ paths accordingly.
+- **CoNLL** files: `data_train.conll`, `data_dev.conll`, `data_test.conll`
+- **Parquet** files: `train-00000-of-00001.parquet`, `validation-00000-of-00001.parquet`, `test-00000-of-00001.parquet`
 
 ## Tips
 Keep notebooks output-free before committing (Colab: Edit ▸ Clear all outputs).
