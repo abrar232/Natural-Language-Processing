@@ -25,21 +25,18 @@ No models/, logs/, or outputs/ folders are created—this repo keeps only what�
 
 ## Setup
 
-python -m venv .venv
-``` # Windows: .venv\Scripts\activate ```
-``` # macOS/Linux: source .venv/bin/activate ```
-
-```# Core libs```
-
-pip install -r requirements.txt
-
-```# If not listed in your requirements, install these:```
-
-pip install datasets "pyarrow>=14" pandas numpy scikit-learn tqdm
-
-```# (Optional for sequence-label metrics)```
-
-pip install seqeval
+    python -m venv .venv
+    # Windows: .venv\Scripts\activate 
+    # macOS/Linux: source .venv/bin/activate 
+    # Core libs
+    
+    pip install -r requirements.txt
+    
+    # If not listed in your requirements, install these:
+    pip install datasets "pyarrow>=14" pandas numpy scikit-learn tqdm
+    
+    # (Optional for sequence-label metrics)
+    pip install seqeval
 
 ## Data
 
@@ -49,53 +46,40 @@ You do not commit dataset files; they’re cached locally under data/raw/hf_cach
 
 ### Load at runtime (recommended)
 
-from datasets import load_dataset
-
-ds = load_dataset("surrey-nlp/PLOD-CW", cache_dir="data/raw/hf_cache")
-
-print(ds)  # DatasetDict with train/validation/test
+    from datasets import load_dataset
+    ds = load_dataset("surrey-nlp/PLOD-CW", cache_dir="data/raw/hf_cache")
+    print(ds)  # DatasetDict with train/validation/test
 
 ### Label names (int → string)
 
-label_names = ds["train"].features["ner_tags"].feature.names
-
-print(label_names)  # e.g. ["B-O", "B-AC", "B-LF", "I-LF", ...]
+    label_names = ds["train"].features["ner_tags"].feature.names
+    print(label_names)  # e.g. ["B-O", "B-AC", "B-LF", "I-LF", ...]
 
 ### Quickstart (put at the top of each notebook)
 
-from src.utils import project_paths, set_seed
-
-from src.dataio import load_plod_cw, label_names
-
-set_seed(42)
-
-P = project_paths()
-
-print("Data root:", P["raw"])
-
-ds = load_plod_cw(cache_dir=P["raw"] / "hf_cache")
-
-print(ds)
-
-print("Labels:", label_names(ds))
-
-```# Peek a sample```
-
-sample = ds["train"][0]
-
-print(sample["tokens"][:20])
-
-print(sample["ner_tags"][:20])  ```# ints → decode with label_names(ds)```
+    from src.utils import project_paths, set_seed
+    from src.dataio import load_plod_cw, label_names
+    
+    set_seed(42)
+    P = project_paths()
+    print("Data root:", P["raw"])
+    
+    ds = load_plod_cw(cache_dir=P["raw"] / "hf_cache")
+    print(ds)
+    print("Labels:", label_names(ds))
+    
+    # Peek a sample
+    sample = ds["train"][0]
+    print(sample["tokens"][:20])
+    print(sample["ner_tags"][:20])  # ints → decode with label_names(ds)
 
 ### Decode tags to strings (handy for inspection/metrics)
 
-names = label_names(ds)
-
-def decode_tags(int_tags):
-
-    return [names[i] for i in int_tags]
-
-print(decode_tags(ds["train"][0]["ner_tags"][:20]))
+    names = label_names(ds)
+    def decode_tags(int_tags):
+        return [names[i] for i in int_tags]
+        
+    print(decode_tags(ds["train"][0]["ner_tags"][:20]))
 
 ## Minimal src/ API
 
