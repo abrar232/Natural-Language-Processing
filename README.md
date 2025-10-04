@@ -8,6 +8,8 @@ Datasets are **loaded at runtime** via `datasets.load_dataset(...)` and cached l
 
 ## Project Structure
 ```text
+
+```text
 .
 ├─ README.md
 ├─ requirements.txt
@@ -20,6 +22,11 @@ Datasets are **loaded at runtime** via `datasets.load_dataset(...)` and cached l
 │  ├─ utils.py              # paths + seeding (minimal)
 │  └─ dataio.py             # PLOD-CW loaders + optional export helpers
 └─ data/
+   ├─ raw/
+   │  ├─ .gitkeep
+   │  └─ hf_cache/          # Hugging Face cache (created at runtime; ignored)
+   └─ processed/
+      └─ .gitkeep
 No models/, logs/, or outputs/ folders are created—this repo keeps only what’s required.
 ```
 
