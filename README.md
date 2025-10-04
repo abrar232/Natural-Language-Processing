@@ -23,10 +23,12 @@ pip install -r requirements.txt
 
 ## Data
 
-This repo uses two formats of the same splits:
+Data can be accessed using the command:
 
-- **CoNLL** files: `data_train.conll`, `data_dev.conll`, `data_test.conll`
-- **Parquet** files: `train-00000-of-00001.parquet`, `validation-00000-of-00001.parquet`, `test-00000-of-00001.parquet`
+from datasets import load_dataset
+
+ds = load_dataset("surrey-nlp/PLOD-CW")
+
 
 ## Tips
 Keep notebooks output-free before committing (Colab: Edit ▸ Clear all outputs).
