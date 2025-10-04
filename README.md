@@ -42,8 +42,6 @@ No models/, logs/, or outputs/ folders are created—this repo keeps only what�
 
 Primary source: Hugging Face dataset surrey-nlp/PLOD-CW (coursework subset for token classification).
 
-You do not commit dataset files; they’re cached locally under data/raw/hf_cache/ (gitignored).
-
 ### Load at runtime (recommended)
 
     from datasets import load_dataset
